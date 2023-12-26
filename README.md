@@ -17,7 +17,7 @@ sh Q2.sh
 
 ## Cleaning up the directory
 
-Ensure you are at root directory, then:
+Ensure you are at the root of this repository, then:
 
 ```shell
 sh clean.sh
