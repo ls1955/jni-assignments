@@ -3,6 +3,10 @@ import java.util.Scanner;
 class HouseLoan {
     private native float monthlyPayment(int loanAmount, float interestRate, int paymentPerYear, int numberOfYears);
 
+    static {
+        System.loadLibrary("HouseLoan");
+    }
+
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
 
