@@ -14,3 +14,11 @@ If you are running linux, simply cd into each assignment directory, and run thei
 cd Q2
 sh Q2.sh
 ```
+
+## Cleaning up the directory
+
+Ensure you are at root directory, then:
+
+```shell
+sh clean.sh
+```
