@@ -1,3 +1,3 @@
 #!/usr/bin/sh
 
-rm ./**/*.class ./**/*.h
+rm ./**/*.class ./**/*.h ./**/*.so
