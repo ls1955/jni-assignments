@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class HouseLoan {
-    private native float monthlyPayment(int loanAmount, float interestRate, int paymentPerYear, int numberOfYears);
+    private native float calculateMonthlyPayment(int loanAmount, float interestRate, int paymentPerYear, int numberOfYears);
 
     static {
         System.loadLibrary("HouseLoan");
@@ -19,9 +19,9 @@ class HouseLoan {
         System.out.println("Enter number of year");
         int numberOfYears = Integer.parseInt(scan.nextLine());
 
-        float monthlyPayment = new HouseLoan().calculateMonthyPayment(
-            loanAmount, interestRate, paymentPerYear, numberOfYears;
-        )
+        float monthlyPayment = new HouseLoan().calculateMonthlyPayment(
+            loanAmount, interestRate, paymentPerYear, numberOfYears
+        );
 
         System.out.println("Monthly payment: " + monthlyPayment);
     }
