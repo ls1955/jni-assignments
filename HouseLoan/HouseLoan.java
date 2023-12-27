@@ -24,12 +24,15 @@ class HouseLoan {
         System.out.println("Enter number of year");
         int numberOfYears = Integer.parseInt(scan.nextLine());
 
-        float monthlyPayment = new HouseLoan().calculateMonthlyPayment(
+        HouseLoan houseLoan = new HouseLoan();
+
+        float monthlyPayment = houseLoan.calculateMonthlyPayment(
             loanAmount, interestRate, paymentPerYear, numberOfYears
         );
 
         System.out.println("Monthly payment: " + monthlyPayment);
 
-        // 
+        // Amortization table section
+        houseLoan.printAmortizationTable(loanAmount, interestRate, monthlyPayment);
     }
 }
