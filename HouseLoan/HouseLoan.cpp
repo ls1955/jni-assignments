@@ -26,7 +26,26 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     jfloat interestRate,
     jfloat montlyPayment
 ) {
-    cout << "Goodbye, world" << endl;
+    cout << "--------------------------------------------------------" << endl;
+    cout << "| NO | Montly Payment | Interest | Principal | Balance |" << endl;
+    cout << "|  0 |                |          |           | " << loanAmount << endl;
+
+    // get object's class reference
+    jclass klass = env->GetObjectClass(obj);
+    // get method ID for *calculatePrinciplePayment* to call it later
+    jmethodID pCallback = env->GetMethodID(klass, "calculatePrincipalPayment", "(IFF)F");
+
+    jfloat balance = (jfloat) loanAmount;
+
+    for (int i = 1 ; i <= 12; i++) {
+        jfloat principal = env->CallFloatMethod(
+            obj, pCallback, (jint) balance, interestRate, montlyPayment
+        );
+        balance -= principal;
+
+        // TODO: Calculate the interest, maybe include another native method?
+        cout << "|  " << i << " |  " << montlyPayment << " | " << principal << " | " << balance << endl;
+    }
 };
 
 JNIEXPORT jfloat JNICALL Java_HouseLoan_calculatePrincipalPayment(
