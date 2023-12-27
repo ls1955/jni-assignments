@@ -4,7 +4,7 @@
 #include "HouseLoan.h"
 using namespace std;
 
-JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthyPayment(
+JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthlyPayment(
     JNIEnv *env,
     jobject obj,
     jint loanAmount,
@@ -12,9 +12,9 @@ JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthyPayment(
     jint paymentPerYear,
     jint numberOfYears
 ) {
-    jfloat r = (jfloat) interestRate;
+    jfloat r = interestRate;
     jfloat n = (jfloat) paymentPerYear;
     jfloat t = (jfloat) numberOfYears;
 
-    return (loanAmount * (r / n)) / (1 - pow((1 + (r / n)), (-1 * n * t)));
+    return ((jfloat) loanAmount * (r / n)) / (1 - pow((1 + (r / n)), (-1 * n * t)));
 }
