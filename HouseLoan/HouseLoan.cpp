@@ -2,6 +2,7 @@
 #include <cmath>
 #include <math.h>
 #include <iostream>
+#include <iomanip>
 #include "HouseLoan.h"
 using namespace std;
 
@@ -30,9 +31,9 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     jfloat interestRate,
     jfloat montlyPayment
 ) {
-    cout << "--------------------------------------------------------" << endl;
-    cout << "| NO | Montly Payment | Interest | Principal | Balance |" << endl;
-    cout << "|  0 |                |          |           | " << loanAmount << endl;
+    cout << "---------------------------------------------------------" << endl;
+    cout << "| NO | Montly Payment | Interest | Principal | Balance  |" << endl;
+    cout << "|  0 |                |          |           | " << loanAmount << "    |" << endl;
 
     // get object's class reference
     jclass klass = env->GetObjectClass(obj);
@@ -53,11 +54,16 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
         // round all values to 2 decimal places
         principal = round(principal * 100.0) / 100.0;
         balance = round(balance * 100.0) / 100.0;
+        jfloat interest = round((montlyPayment - principal) * 100.0) / 100.0;
 
-
-        // TODO: Calculate the interest, maybe include another native method?
-        cout << "|  " << i << " |  " << montlyPayment << " | " << principal << " | " << balance << endl;
+        // print the rows...
+        cout << "| " << setw(2) << i << " |     ";
+        cout << montlyPayment << "    |   ";
+        cout << fixed << setprecision(2) << setw(5) << interest;
+        cout  << "  |  " << principal << "  | " << setw(8) << balance << " |" << endl;
     }
+
+    cout << "---------------------------------------------------------" << endl;
 };
 
 JNIEXPORT jfloat JNICALL Java_HouseLoan_calculatePrincipalPayment(
