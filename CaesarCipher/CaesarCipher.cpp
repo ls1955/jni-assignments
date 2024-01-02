@@ -40,10 +40,10 @@ JNIEXPORT jstring JNICALL Java_CaesarCipher_decrypt(
     jstring ciphertext,
     jint key
 ) {
-    const char *plaintextStr = env->GetStringUTFChars(plaintext, NULL);
+    const char *ciphertextStr = env->GetStringUTFChars(ciphertext, NULL);
     string result;
 
-    for (char chr : plaintextStr) {
+    for (char chr : ciphertextStr) {
         if (chr >= 'A' && chr <= 'Z') {
             result += ((chr - 'A' - key) % 26 + 'A');
         } else if (chr >= 'a' && chr <= 'z') {
