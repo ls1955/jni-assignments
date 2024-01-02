@@ -24,7 +24,7 @@ cd Q2
 ./Q2
 ```
 
-## Cleaning up the directory
+## Cleaning up the directory (Linux only)
 
 Ensure you are at the root of this repository, then:
 
