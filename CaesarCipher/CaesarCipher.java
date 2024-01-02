@@ -20,7 +20,7 @@ class CaesarCipher {
         System.out.println("Enter key to encrypt plaintext: ");
         int key = Integer.parseInt(scan.nextLine());
 
-        String ciphertext = encrypt(input, key);
+        String ciphertext = cipher.encrypt(input, key);
         System.out.println("Ciphertext: " + ciphertext);
 
         System.out.println("Enter ciphertext: ");
@@ -28,7 +28,7 @@ class CaesarCipher {
         System.out.println("Enter key to decrypt ciphertext: ");
         key = Integer.parseInt(scan.nextLine());
 
-        String plaintext = decrypt(ciphertext, key);
+        String plaintext = cipher.decrypt(ciphertext, key);
         System.out.println("Plaintext: " + plaintext);
     }
 }
