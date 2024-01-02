@@ -1,9 +1,9 @@
 class CaesarCipher {
-    private native string getInput();
+    private native String getInput();
 
-    private native string encrypt(string plaintext, int key);
+    private native String encrypt(String plaintext, int key);
 
-    private native string decrypt(string ciphertext, int key);
+    private native String decrypt(String ciphertext, int key);
 
     static {
         System.loadLibrary("CaesarCipher");
