@@ -15,6 +15,15 @@ cd Q2
 sh Q2.sh
 ```
 
+# Run the assignment (Window)
+
+If you are running on window, cd into each assignment directory, and run their corresponding .bat script. For example:
+
+```cmd
+cd Q2
+./Q2
+```
+
 ## Cleaning up the directory
 
 Ensure you are at the root of this repository, then:
