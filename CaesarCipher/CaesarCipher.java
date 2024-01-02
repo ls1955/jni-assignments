@@ -12,7 +12,7 @@ class CaesarCipher {
     }
 
     public static void main(String args[]) {
-        Scanner scan = new Scanner();
+        Scanner scan = new Scanner(System.in);
         CaesarCipher cipher = new CaesarCipher();
 
         System.out.println("Enter plaintext: ");
