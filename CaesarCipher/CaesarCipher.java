@@ -23,12 +23,7 @@ class CaesarCipher {
         String ciphertext = cipher.encrypt(input, key);
         System.out.println("Ciphertext: " + ciphertext);
 
-        System.out.println("Enter ciphertext: ");
-        input = cipher.getInput();
-        System.out.println("Enter key to decrypt ciphertext: ");
-        key = Integer.parseInt(scan.nextLine());
-
-        String plaintext = cipher.decrypt(ciphertext, key);
-        System.out.println("Plaintext: " + plaintext);
+        String plaintext = cipher.decrypt(ciphertext, -1 * key);
+        System.out.println("Original text: " + plaintext);
     }
 }

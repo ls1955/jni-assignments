@@ -5,7 +5,6 @@ using namespace std;
 
 JNIEXPORT jstring JNICALL Java_CaesarCipher_getInput(JNIEnv *env, jobject obj) {
     string input;
-    cout << "Enter your input: ";
     cin >> input;
 
     // convert input to C++ String to C String, then to jstring
@@ -18,10 +17,10 @@ JNIEXPORT jstring JNICALL Java_CaesarCipher_encrypt(
     jstring plaintext,
     jint key
 ) {
-    const char *plaintextStr = env->GetStringUTFChars(plaintext, NULL);
+    string plaintextStr = env->GetStringUTFChars(plaintext, 0);
     string result;
 
-    for (char chr : plaintextStr) {
+    for (auto &chr : plaintextStr) {
         if (chr >= 'A' && chr <= 'Z') {
             result += ((chr - 'A' + key) % 26 + 'A');
         } else if (chr >= 'a' && chr <= 'z') {
@@ -40,14 +39,14 @@ JNIEXPORT jstring JNICALL Java_CaesarCipher_decrypt(
     jstring ciphertext,
     jint key
 ) {
-    const char *ciphertextStr = env->GetStringUTFChars(ciphertext, NULL);
+    string ciphertextStr = env->GetStringUTFChars(ciphertext, 0);
     string result;
 
-    for (char chr : ciphertextStr) {
+    for (auto &chr : ciphertextStr) {
         if (chr >= 'A' && chr <= 'Z') {
-            result += ((chr - 'A' - key) % 26 + 'A');
+            result += ((chr - 'A' - key + 26) % 26 + 'A');
         } else if (chr >= 'a' && chr <= 'z') {
-            result += ((chr - 'a' - key) % 26 + 'a');
+            result += ((chr - 'a' - key + 26) % 26 + 'a');
         } else {
             result += chr;
         }
