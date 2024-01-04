@@ -24,10 +24,17 @@ cd Q2
 ./Q2
 ```
 
-## Cleaning up the directory (Linux only)
+# Cleaning up the directory (Linux only)
 
 Ensure you are at the root of this repository, then:
 
 ```shell
 sh clean.sh
 ```
+
+# Existing issues
+* HouseLoan : 
+  * Result are slightly off than provided example. As dealing with float is a huge pain in the arse.
+  * Statements to print out the table is messy.
+* CaesarCipher:
+  * If input contain whitespace, when passing input between Java kingdom and C++ land, seems like the input is automatically split, and only the first portion is pass between. (Ex: "tuna vanilla and more word" -> "tuna")
