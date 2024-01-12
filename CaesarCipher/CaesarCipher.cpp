@@ -5,7 +5,7 @@ using namespace std;
 
 JNIEXPORT jstring JNICALL Java_CaesarCipher_getInput(JNIEnv *env, jobject obj) {
     string input;
-    cin >> input;
+    getline(cin, input);
 
     // convert input to C++ String to C String, then to jstring
     return env->NewStringUTF(input.c_str());
