@@ -44,9 +44,9 @@ JNIEXPORT jstring JNICALL Java_CaesarCipher_decrypt(
 
     for (auto &chr : ciphertextStr) {
         if (chr >= 'A' && chr <= 'Z') {
-            result += ((chr - 'A' - key + 26) % 26 + 'A');
+            result += ((chr - 'A' - key) % 26 + 'A');
         } else if (chr >= 'a' && chr <= 'z') {
-            result += ((chr - 'a' - key + 26) % 26 + 'a');
+            result += ((chr - 'a' - key) % 26 + 'a');
         } else {
             result += chr;
         }
