@@ -5,7 +5,7 @@ class HouseLoan {
 
     private native void printAmortizationTable(int loanAmount, float interestRate, float monthlyPayment);
 
-    private native float calculatePrincipalPayment(int loanAmount, float interestRate, float monthlyPayment);
+    private native double calculatePrincipalPayment(float monthlyPayment, float interest);
 
     static {
         System.loadLibrary("HouseLoan");

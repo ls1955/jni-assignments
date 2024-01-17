@@ -6,6 +6,10 @@
 #include "HouseLoan.h"
 using namespace std;
 
+float to2Decimal(double val) {
+    return round(value * 100.0) / 100.0;
+}
+
 JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthlyPayment(
     JNIEnv *env,
     jobject obj,
@@ -21,7 +25,7 @@ JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthlyPayment(
     jfloat result = ((jfloat) loanAmount * (r / n)) / (1 - pow((1 + (r / n)), (-1 * n * t)));
 
     // round to 2 decimal places as given output is in 2 decimal places
-    return round(result * 100.0) / 100.0;
+    return to2Decimal(result);
 }
 
 JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
@@ -40,21 +44,17 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     // get method ID for *calculatePrinciplePayment* to call it later
     jmethodID pCallback = env->GetMethodID(klass, "calculatePrincipalPayment", "(IFF)F");
 
-    // round to 2 decimal as calculation seems off without it
-    interestRate = round(interestRate * 100.0) / 100.0;
-    // cast loanAmount to jfloat as claculation seems off without it
-    jfloat balance = (jfloat) loanAmount;
+    jdouble balance = (jdouble) loanAmount;
 
     for (int i = 1 ; i <= 12; i++) {
-        jfloat principal = env->CallFloatMethod(
-            obj, pCallback, (jint) balance, interestRate, montlyPayment
-        );
+        jdouble interest = balance * (interestRate / 12);
+        jdouble principal = env->CallDoubleMethod(obj, pCallback, monthlyPayment, interest);
         balance -= principal;
 
         // round all values to 2 decimal places
-        principal = round(principal * 100.0) / 100.0;
-        balance = round(balance * 100.0) / 100.0;
-        jfloat interest = round((montlyPayment - principal) * 100.0) / 100.0;
+        principal = to2Decimal(principal);
+        balance = to2Decimal(principal);
+        interest = to2Decimal(interest);
 
         // print the rows...
         cout << "| " << setw(2) << i << " |     ";
