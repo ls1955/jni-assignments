@@ -31,8 +31,8 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     JNIEnv *env,
     jobject obj,
     jint loanAmount,
-    jfloat interestRate,
-    jfloat monthlyPayment
+    jdouble interestRate,
+    jdouble monthlyPayment
 ) {
     cout << "---------------------------------------------------------" << endl;
     cout << "| NO | Montly Payment | Interest | Principal | Balance  |" << endl;
@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
 
         // round all values to 2 decimal places
         principal = to2Decimal(principal);
-        balance = to2Decimal(principal);
+        balance = to2Decimal(balance);
         interest = to2Decimal(interest);
 
         // print the rows...
