@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 class HouseLoan {
-    private native float calculateMonthlyPayment(int loanAmount, float interestRate, int paymentPerYear, int numberOfYears);
+    private native double calculateMonthlyPayment(int loanAmount, double interestRate, int paymentPerYear, int numberOfYears);
 
-    private native void printAmortizationTable(int loanAmount, float interestRate, float monthlyPayment);
+    private native void printAmortizationTable(int loanAmount, double interestRate, double monthlyPayment);
 
-    private native double calculatePrincipalPayment(float monthlyPayment, float interest);
+    private native double calculatePrincipalPayment(double monthlyPayment, double interest);
 
     static {
         System.loadLibrary("HouseLoan");
@@ -18,7 +18,7 @@ class HouseLoan {
         System.out.println("Enter loan amount");
         int loanAmount = Integer.parseInt(scan.nextLine());
         System.out.println("Enter interest rate");
-        float interestRate = Float.parseFloat(scan.nextLine());
+        double interestRate = Double.parseDouble(scan.nextLine());
         System.out.println("Enter payment per year");
         int paymentPerYear = Integer.parseInt(scan.nextLine());
         System.out.println("Enter number of year");
@@ -26,13 +26,13 @@ class HouseLoan {
 
         HouseLoan houseLoan = new HouseLoan();
 
-        float monthlyPayment = houseLoan.calculateMonthlyPayment(
+        double monthlyPayment = houseLoan.calculateMonthlyPayment(
             loanAmount, interestRate, paymentPerYear, numberOfYears
         );
 
-        System.out.println("Monthly payment: " + monthlyPayment);
+        System.out.println("Monthly payment: " + String.format("%.2f",monthlyPayment));
 
         // Amortization table section
-        houseLoan.printAmortizationTable(loanAmount, interestRate, monthlyPayment);
+        // houseLoan.printAmortizationTable(loanAmount, interestRate, monthlyPayment);
     }
 }

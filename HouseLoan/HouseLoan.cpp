@@ -10,20 +10,19 @@ float to2Decimal(double val) {
     return round(val * 100.0) / 100.0;
 }
 
-JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthlyPayment(
-    JNIEnv *env,
-    jobject obj,
+JNIEXPORT jdouble JNICALL Java_HouseLoan_calculateMonthlyPayment(
+    JNIEnv *,
+    jobject,
     jint loanAmount,
-    jfloat interestRate,
+    jdouble interestRate,
     jint paymentPerYear,
     jint numberOfYears
 ) {
-    jfloat r = interestRate;
-    jfloat n = (jfloat) paymentPerYear;
-    jfloat t = (jfloat) numberOfYears;
+    jdouble r = interestRate;
+    jdouble n = (jdouble) paymentPerYear;
+    jdouble t = (jdouble) numberOfYears;
 
-    jfloat result = ((jfloat) loanAmount * (r / n)) / (1 - pow((1 + (r / n)), (-1 * n * t)));
-
+    jdouble result = ((jdouble) loanAmount * (r / n)) / (1 - pow((1 + (r / n)), (-1 * n * t)));
     // round to 2 decimal places as given output is in 2 decimal places
     return to2Decimal(result);
 }
@@ -42,7 +41,7 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     // get object's class reference
     jclass klass = env->GetObjectClass(obj);
     // get method ID for *calculatePrinciplePayment* to call it later
-    jmethodID pCallback = env->GetMethodID(klass, "calculatePrincipalPayment", "(FF)D");
+    jmethodID pCallback = env->GetMethodID(klass, "calculatePrincipalPayment", "(DD)D");
 
     jdouble balance = (jdouble) loanAmount;
 
@@ -66,16 +65,11 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     cout << "---------------------------------------------------------" << endl;
 };
 
-JNIEXPORT jfloat JNICALL Java_HouseLoan_calculatePrincipalPayment(
+JNIEXPORT jdouble JNICALL Java_HouseLoan_calculatePrincipalPayment(
     JNIEnv *env,
     jobject obj,
-    jint loanAmount,
-    jfloat interestRate,
-    jfloat monthlyPayment
+    jdouble monthlyPayment,
+    jdouble interest
 ) {
-    jfloat mp = monthlyPayment;
-    jfloat olb = (jfloat) loanAmount;
-    jint monthsAmount = 12;
-
-    return mp - (olb * (interestRate / monthsAmount));
+    return monthlyPayment - interest;
 };
