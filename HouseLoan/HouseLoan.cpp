@@ -7,7 +7,7 @@
 using namespace std;
 
 float to2Decimal(double val) {
-    return round(value * 100.0) / 100.0;
+    return round(val * 100.0) / 100.0;
 }
 
 JNIEXPORT jfloat JNICALL Java_HouseLoan_calculateMonthlyPayment(
@@ -33,7 +33,7 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     jobject obj,
     jint loanAmount,
     jfloat interestRate,
-    jfloat montlyPayment
+    jfloat monthlyPayment
 ) {
     cout << "---------------------------------------------------------" << endl;
     cout << "| NO | Montly Payment | Interest | Principal | Balance  |" << endl;
@@ -42,7 +42,7 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
     // get object's class reference
     jclass klass = env->GetObjectClass(obj);
     // get method ID for *calculatePrinciplePayment* to call it later
-    jmethodID pCallback = env->GetMethodID(klass, "calculatePrincipalPayment", "(IFF)F");
+    jmethodID pCallback = env->GetMethodID(klass, "calculatePrincipalPayment", "(FF)D");
 
     jdouble balance = (jdouble) loanAmount;
 
@@ -58,7 +58,7 @@ JNIEXPORT void JNICALL Java_HouseLoan_printAmortizationTable(
 
         // print the rows...
         cout << "| " << setw(2) << i << " |     ";
-        cout << montlyPayment << "    |   ";
+        cout << monthlyPayment << "    |   ";
         cout << fixed << setprecision(2) << setw(5) << interest;
         cout  << "  |  " << principal << "  | " << setw(8) << balance << " |" << endl;
     }
@@ -71,9 +71,9 @@ JNIEXPORT jfloat JNICALL Java_HouseLoan_calculatePrincipalPayment(
     jobject obj,
     jint loanAmount,
     jfloat interestRate,
-    jfloat montlyPayment
+    jfloat monthlyPayment
 ) {
-    jfloat mp = montlyPayment;
+    jfloat mp = monthlyPayment;
     jfloat olb = (jfloat) loanAmount;
     jint monthsAmount = 12;
 
