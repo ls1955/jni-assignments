@@ -32,7 +32,3 @@ Ensure you are at the root of this repository, then:
 sh clean.sh
 ```
 
-# Existing issues
-* HouseLoan : 
-  * Result are slightly off than provided example. As dealing with float is a huge pain in the arse.
-  * Statements to print out the table is messy.
