@@ -32,7 +32,6 @@ class HouseLoan {
 
         System.out.println("Monthly payment: " + String.format("%.2f",monthlyPayment));
 
-        // Amortization table section
-        // houseLoan.printAmortizationTable(loanAmount, interestRate, monthlyPayment);
+        houseLoan.printAmortizationTable(loanAmount, interestRate, monthlyPayment);
     }
 }
